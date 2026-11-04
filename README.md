@@ -2,7 +2,7 @@
 
 [English](README.md) | [Русский](README.ru.md)
 
-Compare business data snapshots, detect added, missing and changed records, and export an actionable Excel report — without writing SQL or Python.
+Compare business data snapshots, detect added, missing and changed records, reopen local comparison history, and export actionable Excel reports — without writing SQL or Python.
 
 ![Tests](https://github.com/exeD1n/data-snapshot-diff/actions/workflows/tests.yml/badge.svg)
 
@@ -20,7 +20,7 @@ Data and business analysts, e-commerce managers, data engineers, catalogue owner
 2. Choose one or more key columns.
 3. Optionally map price and stock columns.
 4. Review added, missing, changed, unchanged records and schema changes.
-5. Download a formatted Excel report.
+5. Download a formatted Excel report or save it to private local history.
 
 ## Business use cases
 
@@ -37,6 +37,7 @@ Data and business analysts, e-commerce managers, data engineers, catalogue owner
 - Order-independent row and column comparison; explicit schema changes
 - Opt-in, deterministic price/stock insights
 - Searchable details and formula-injection-safe styled Excel export
+- Local comparison history with KPI preview, report-sheet viewer, and repeat download
 - 25 MB per-file limit; in-memory processing without external APIs
 
 ## Quick start
@@ -59,6 +60,10 @@ streamlit run app.py
 
 `examples/products_before.csv` and `products_after.csv` implement the documented P100–P106 control case: 1 added, 1 missing, 2 changed, 3 unchanged records, and 2 changed cells. The two order workbooks contain a larger synthetic order-status example. All data is fictional.
 
+## Local history
+
+After a comparison, enter a report name and select **Save to history**. The app stores the generated workbook and compact metadata in `.data_snapshot_diff/history` on the machine running Streamlit. Open **History** in the sidebar to review KPI totals, inspect any report sheet, or download the workbook again. This directory is excluded from Git and is never uploaded by the application.
+
 ## Testing
 
 ```bash
@@ -76,6 +81,7 @@ CI runs the linter and tests with an 85% coverage gate on Python 3.11 and 3.12.
 - Values are compared conservatively: `00123` differs from `123`, and numeric `123` differs from text `"123"`.
 - XLSX stored values are compared, not visual formatting. CSV inference supports common encodings/delimiters only.
 - Insights require explicit column mapping and indicate events, not business causality.
+- History belongs to one local installation. Ephemeral cloud hosting can clear it between restarts unless persistent storage is configured.
 
 ## Roadmap
 

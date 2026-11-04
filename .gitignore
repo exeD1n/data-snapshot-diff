@@ -19,6 +19,7 @@ tmp/
 temp/
 output/
 reports/
+.data_snapshot_diff/
 ~$*.xlsx
 *.tmp
 .idea/
